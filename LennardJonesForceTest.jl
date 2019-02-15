@@ -395,7 +395,7 @@ function TotalEnergyStructOfSArrays(array::StructOfSArrays,vdwTable::Table,
     diff = Vector{Float64}(undef,3)
     @inbounds for i = 1:(n-1)
         ti = array.type[i]
-        @inbounds for j = (i+1):n
+        for j = (i+1):n
             tj = array.type[j]
             SingleLJ6!(diff,
                        array.f[i],array.f[j],
@@ -462,7 +462,7 @@ function TotalEnergyGitStructArray(r::Array{SArray{Tuple{3},T,1,3} where T,1},
     diff = Vector{Float64}(undef,3)
     @inbounds for i = 1:(n-1)
         ti = t[i]
-        @inbounds for j = (i+1):n
+        for j = (i+1):n
             tj = t[j]
             SingleLJ7!(diff,
                        f[i],f[j],
