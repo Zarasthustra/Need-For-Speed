@@ -209,7 +209,7 @@ function TotalEnergySarray(r::Array{MArray{Tuple{3},Float64,1,3},1},f::Array{MAr
         ti = type[i][1]
         for j = (i+1):n
             tj = type[j][1]
-            SingleLJ3!(f[j], f[j], diff,
+            SingleLJ3!(f[i], f[j], diff,
                       r[i], r[j],
                        vdwTable.ϵij[ti,tj],
                        vdwTable.σij[ti,tj],
@@ -487,7 +487,7 @@ vdwTable = Table([rand() for i=1:m,j=1:m],
 #                   Start of trials
 ################################################################################
 " make static but mutable arrays "
-r = [MVector{3}(rand(), rand(), rand()) for i = 1:x]
+r = [MVector{3}(rand(), rand(), rand()) .* box_size[1] for i = 1:x]
 f = [MVector{3}(0.0, 0.0, 0.0) for i = 1:x]
 type = [MVector{1}(rand(1:m)) for i = 1:x] #MVector{x}(rand(1:m),x) #for i=1:x
 
